@@ -45,7 +45,7 @@ def get_host_ip():
         ip = s.getsockname()[0]
         return ip
 
-        
+
 def get_gpu_info():
     gpu_info = {}
     for i in range(len(handle_list)):
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     error_count = 0
     while True:
         body['ip'] = get_host_ip()
-        body['gpu_info'] = get_gpu_info()
+        body['gpu_info'] = get_gpu_info2()
         body['_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
         success = False
         try:

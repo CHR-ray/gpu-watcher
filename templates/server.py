@@ -3,6 +3,7 @@ import time
 import yaml
 import os
 from flask import Flask, request, render_template, send_file
+from datetime import datetime
 
 
 with open(os.path.join(os.path.split(__file__)[0], 'config.yaml')) as f:
@@ -14,7 +15,13 @@ act_map = {}
 
 @app.route('/')
 def index():
-    return send_file('templates/index.html')
+    # return send_file('templates/index.html')
+    gpustats=[]
+    for host, data in act_map.items():
+        gpustats.append(data['gpu_info'])
+        
+    now = datetime.now().strftime('Updated at %Y-%m-%d %H-%M-%S')
+    return render_template('index.tpl',gpustats=act_map,update_time=now)
 
 
 @app.route('/api/gpu', methods=['GET', 'POST'])
