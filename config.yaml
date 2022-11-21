@@ -2,6 +2,3 @@ lab:
   center:
     ip: 10.20.12.102
     port: 9999
-
-local:
-  host: ai01
