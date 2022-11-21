@@ -1,0 +1,7 @@
+lab:
+  center:
+    ip: 10.20.12.102
+    port: 80
+
+local:
+  host: ai01
