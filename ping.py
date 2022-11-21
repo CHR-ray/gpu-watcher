@@ -104,8 +104,7 @@ if __name__ == "__main__":
         '_date': None}
     error_count = 0
     while True:
-        body['host'] = get_host_ip()
-        body['ip'] = body['host']
+        body['ip'] = get_host_ip()
         body['gpu_info'] = get_gpu_info()
         body['_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
         success = False
