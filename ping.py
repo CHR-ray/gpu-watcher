@@ -101,4 +101,3 @@ if __name__ == "__main__":
         else:
             error_count = 0
         time.sleep(10)
-        a=2
