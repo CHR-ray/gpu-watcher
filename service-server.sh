@@ -2,7 +2,7 @@
 
 echo 'Install gpuwatch service:'
 
-user=$USER
+user=zhuzihao
 python_path=/usr/local/anaconda3/bin/python
 
 echo ''
@@ -19,7 +19,7 @@ mkdir -p ${log_path}
 sudo echo "[program:gpuwatch]
 user = ${user}
 directory = /home/${user}
-command = ${path} gpu-watch/server.py
+command = ${python_path} gpu-watcher/server.py
 autostart = true
 autorestart = true
 stderr_logfile = ${log_path}/stderr.log

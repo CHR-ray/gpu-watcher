@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 gpu_stats_dict = {}
 
-@app.route('/')
+@app.route('/gpustats', methods=['GET'])
 def index():
     my_gpudata=get_my_gpu_info()
     gpu_stats_dict[my_gpudata['gpu_info']['hostname']]=my_gpudata
