@@ -117,7 +117,7 @@ if __name__ == "__main__":
         body['_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
         success = False
         try:
-            res = requests.post(target, json.dumps(body))
+            res = requests.post(target, json.dumps(body,default=str))
             if res.status_code == 200:
                 success = True
                 print('Success ping')
