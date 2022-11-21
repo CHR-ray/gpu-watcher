@@ -4,4 +4,4 @@ lab:
     port: 80
 
 local:
-  host: ai01
+  host: ai02
