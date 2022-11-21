@@ -46,25 +46,25 @@ def get_host_ip():
         return ip
 
 
-def get_gpu_info():
-    gpu_info = {}
-    for i in range(len(handle_list)):
-        meminfo = pynvml.nvmlDeviceGetMemoryInfo(handle_list[i])
-        use = pynvml.nvmlDeviceGetUtilizationRates(handle_list[i])
-        brand = pynvml.nvmlDeviceGetName(handle_list[i]).decode("utf-8")
-        #original
-        #gpu_info[i] = {
-        #    'status': '{:.1f}M/{:.1f}M'.format(meminfo.used / 2**20, meminfo.total / 2**20),
-        #    'percentage': round(meminfo.used / meminfo.total * 100)
-        #}
-        gpu_info[i] = {
-            'status': '{:.1f}M/{:.1f}M'.format(meminfo.used / 2**20, meminfo.total / 2**20),
-            'percentage': round(use.gpu),
-            'brand' : brand
-        }
-    return gpu_info
+# def get_gpu_info():
+#     gpu_info = {}
+#     for i in range(len(handle_list)):
+#         meminfo = pynvml.nvmlDeviceGetMemoryInfo(handle_list[i])
+#         use = pynvml.nvmlDeviceGetUtilizationRates(handle_list[i])
+#         brand = pynvml.nvmlDeviceGetName(handle_list[i]).decode("utf-8")
+#         #original
+#         #gpu_info[i] = {
+#         #    'status': '{:.1f}M/{:.1f}M'.format(meminfo.used / 2**20, meminfo.total / 2**20),
+#         #    'percentage': round(meminfo.used / meminfo.total * 100)
+#         #}
+#         gpu_info[i] = {
+#             'status': '{:.1f}M/{:.1f}M'.format(meminfo.used / 2**20, meminfo.total / 2**20),
+#             'percentage': round(use.gpu),
+#             'brand' : brand
+#         }
+#     return gpu_info
 
-def get_gpu_info2():
+def get_gpu_info():
 
     from gpustat import GPUStatCollection
     try:
@@ -105,15 +105,14 @@ def get_gpu_info2():
 
 if __name__ == "__main__":
     body = {
-        'ip': None, 
-        'host': host, 
+        'ip': None,  
         'gpu_nums': gpu_nums,
         'gpu_info': {}, 
         '_date': None}
     error_count = 0
     while True:
         body['ip'] = get_host_ip()
-        body['gpu_info'] = get_gpu_info2()
+        body['gpu_info'] = get_gpu_info()
         body['_date'] = time.strftime('%Y-%m-%d %H:%M:%S')
         success = False
         try:

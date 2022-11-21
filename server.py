@@ -11,22 +11,17 @@ with open(os.path.join(os.path.split(__file__)[0], 'config.yaml')) as f:
 
 app = Flask(__name__)
 
-act_map = {}
+gpu_stats_dict = {}
 
 @app.route('/')
 def index():
-    # return send_file('templates/index.html')
-    gpustats=[]
-    for host, data in act_map.items():
-        gpustats.append(data['gpu_info'])
-        
     now = datetime.now().strftime('Updated at %Y-%m-%d %H-%M-%S')
-    return render_template('index.tpl',gpustats=act_map,update_time=now)
+    return render_template('index.html',gpustats=gpu_stats_dict,update_time=now)
 
 
 @app.route('/api/gpu', methods=['GET', 'POST'])
 def gpu():
-    return json.dumps(act_map, sort_keys=True)
+    return json.dumps(gpu_stats_dict, sort_keys=True)
 
 @app.route('/api/ping', methods=['GET', 'POST'])
 def ping():
@@ -37,7 +32,7 @@ def ping():
         if not data.get('ip'):
             body = 1
         else:
-            act_map[data['host']] = data
+            gpu_stats_dict[data['ip']] = data
     return str(body)
 
 @app.route('/api/myip', methods=['GET'])
