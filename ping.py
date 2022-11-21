@@ -12,6 +12,7 @@ with open(os.path.join(os.path.split(__file__)[0], 'config.yaml')) as f:
 pynvml.nvmlInit()
 host = config['local']['host']
 target = 'http://{}:{}/api/ping'.format(config['lab']['center']['ip'], config['lab']['center']['port'])
+target_ip = 'http://{}:{}/api/myip'.format(config['lab']['center']['ip'], config['lab']['center']['port'])
 gpu_nums = pynvml.nvmlDeviceGetCount()
 handle_list = [pynvml.nvmlDeviceGetHandleByIndex(i) for i in range(gpu_nums)]
 

@@ -34,5 +34,10 @@ def ping():
             act_map[data['host']] = data
     return str(body)
 
+@app.route('/api/myip', methods=['GET'])
+def myip():
+    ip = request.remote_addr
+    return ip
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=9999)

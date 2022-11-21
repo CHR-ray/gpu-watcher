@@ -1,7 +1,7 @@
 lab:
   center:
     ip: 10.20.12.102
-    port: 80
+    port: 9999
 
 local:
-  host: ai02
+  host: ai01
