@@ -11,8 +11,8 @@ with open(os.path.join(os.path.split(__file__)[0], 'config.yaml')) as f:
 
 pynvml.nvmlInit()
 target = 'http://{}:{}/api/ping'.format(config['lab']['center']['ip'], config['lab']['center']['port'])
-gpu_nums = pynvml.nvmlDeviceGetCount()
-handle_list = [pynvml.nvmlDeviceGetHandleByIndex(i) for i in range(gpu_nums)]
+# gpu_nums = pynvml.nvmlDeviceGetCount()
+# handle_list = [pynvml.nvmlDeviceGetHandleByIndex(i) for i in range(gpu_nums)]
 
 
 # def get_host_ip():
@@ -72,13 +72,21 @@ def get_gpu_info():
             ]
             gpu['user_processes'] = ' '.join(user_process)
 
-            gpu['flag'] = 'bg-primary'
+            gpu['tem_flag'] = 'bg-primary'
             if gpu['temperature.gpu'] > 75:
-                gpu['flag'] = 'bg-danger'
+                gpu['tem_flag'] = 'bg-danger'
             elif gpu['temperature.gpu'] > 50:
-                gpu['flag'] = 'bg-warning'
+                gpu['tem_flag'] = 'bg-warning'
             elif gpu['temperature.gpu'] > 25:
-                gpu['flag'] = 'bg-success'
+                gpu['tem_flag'] = 'bg-success'
+            
+            gpu['mem_flag'] = 'bg-success'
+            if gpu['memory'] > 70:
+                gpu['mem_flag'] = 'bg-danger'
+            elif gpu['memory'] > 10:
+                gpu['mem_flag'] = 'bg-warning'
+            elif gpu['memory'] > 5:
+                gpu['mem_flag'] = 'bg-info'
 
         if delete_list:
             for gpu_id in delete_list:
@@ -92,7 +100,6 @@ def get_gpu_info():
 if __name__ == "__main__":
     body = {
         'ip': None,  
-        'gpu_nums': gpu_nums,
         'gpu_info': {}, 
         '_date': None}
     error_count = 0
