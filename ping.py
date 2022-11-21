@@ -17,27 +17,35 @@ gpu_nums = pynvml.nvmlDeviceGetCount()
 handle_list = [pynvml.nvmlDeviceGetHandleByIndex(i) for i in range(gpu_nums)]
 
 
-def get_host_ip():
-    error_count = 0
-    while True:
-        success = False
-        try:
-            res = requests.get(target_ip, '')
-            if res.status_code == 200:
-                success = True
-                myip = res.text
-                return myip
-        except Exception:
-            pass
-        if not success:
-            error_count += 1
-            if error_count > 3:
-                print('Failed to connect 3 times, try again in 5 minutes...')
-                time.sleep(5 * 60)
-                continue
-        else:
-            error_count = 0
+# def get_host_ip():
+#     error_count = 0
+#     while True:
+#         success = False
+#         try:
+#             res = requests.get(target_ip, '')
+#             if res.status_code == 200:
+#                 success = True
+#                 myip = res.text
+#                 return myip
+#         except Exception:
+#             pass
+#         if not success:
+#             error_count += 1
+#             if error_count > 3:
+#                 print('Failed to connect 3 times, try again in 5 minutes...')
+#                 time.sleep(5 * 60)
+#                 continue
+#         else:
+#             error_count = 0
 
+
+def get_host_ip():
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        s.connect(('8.8.8.8', 80))
+        ip = s.getsockname()[0]
+        return ip
+
+        
 def get_gpu_info():
     gpu_info = {}
     for i in range(len(handle_list)):
