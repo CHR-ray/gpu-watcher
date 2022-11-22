@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>gpuview</title>
+    <title>GPU Status</title>
+    <link rel="icon" href="https://s1.ax1x.com/2022/11/22/z1wz4J.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -17,7 +18,7 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <a class="navbar-brand" href="index.html">SCLBD GPU Status</a>
+        <a class="navbar-brand" href="">SCLBD GPU Status</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
             data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -26,10 +27,6 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Table">
-                    <!-- a class="nav-link" href="#table">
-                        <i class="fas fa-table"></i>
-                        <span class="nav-link-text">Table</span>
-                    </a -->
                 </li>
             </ul>
         </div>
@@ -76,7 +73,7 @@
                 {% endfor %}
                 {% endfor %}
             </div>
-            <!-- GPU Stat Card-->
+            <!-- GPU Stat Table-->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> All Hosts and GPUs
@@ -101,7 +98,7 @@
                                 <tr class="small" id={{ hostname }}>
                                     <th scope="row">{{ hostname }} </th>
                                     <td> [{{ gpu['index'] }}] {{ gpu['name'] }} </td>
-                                    <td> {{ gpu['temperature.gpu'] }}&#8451; </td>
+                                    <td class="{{gpu['tem_flag']}}"> {{ gpu['temperature.gpu'] }}&#8451; </td>
                                     <td> {{ gpu['utilization.gpu'] }}% </td>
                                     <td> {{ gpu['memory'] }}% ({{ gpu['memory.used'] }}/{{ gpu['memory.total'] }}) </td>
                                     <td> {{ gpu['power.draw'] }} / {{ gpu['enforced.power.limit'] }} </td>
