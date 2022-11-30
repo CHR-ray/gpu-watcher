@@ -16,8 +16,17 @@ app = Flask(__name__)
 
 gpu_stats_dict = {}
 
-@app.route('/gpustats', methods=['GET'])
+
+@app.route('/', methods=['GET'])
 def index():
+    my_gpudata=get_my_gpu_info()
+    gpu_stats_dict[my_gpudata['gpu_info']['hostname']]=my_gpudata
+    sorted_gpu_stats_dict=OrderedDict(sorted(gpu_stats_dict.items()))
+    now = datetime.now().strftime('Updated at %Y-%m-%d %H-%M-%S')
+    return render_template('index.html',gpustats=sorted_gpu_stats_dict,update_time=now)
+
+@app.route('/gpustats', methods=['GET'])
+def index2():
     my_gpudata=get_my_gpu_info()
     gpu_stats_dict[my_gpudata['gpu_info']['hostname']]=my_gpudata
     sorted_gpu_stats_dict=OrderedDict(sorted(gpu_stats_dict.items()))
