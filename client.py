@@ -75,9 +75,9 @@ def get_gpu_info():
             gpu['tem_flag'] = 'bg-success'
             if gpu['temperature.gpu'] > 75:
                 gpu['tem_flag'] = 'bg-danger'
-            elif gpu['temperature.gpu'] > 50:
+            elif gpu['temperature.gpu'] > 45:
                 gpu['tem_flag'] = 'bg-warning'
-            elif gpu['temperature.gpu'] > 25:
+            elif gpu['temperature.gpu'] > 30:
                 gpu['tem_flag'] = 'bg-info'
             
             gpu['mem_flag'] = 'bg-success'
