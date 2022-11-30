@@ -72,13 +72,13 @@ def get_gpu_info():
             ]
             gpu['user_processes'] = ' '.join(user_process)
 
-            gpu['tem_flag'] = 'bg-primary'
+            gpu['tem_flag'] = 'bg-success'
             if gpu['temperature.gpu'] > 75:
                 gpu['tem_flag'] = 'bg-danger'
             elif gpu['temperature.gpu'] > 50:
                 gpu['tem_flag'] = 'bg-warning'
             elif gpu['temperature.gpu'] > 25:
-                gpu['tem_flag'] = 'bg-success'
+                gpu['tem_flag'] = 'bg-info'
             
             gpu['mem_flag'] = 'bg-success'
             if gpu['memory'] > 70:
